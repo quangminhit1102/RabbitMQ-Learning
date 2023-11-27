@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using RabbitMQ.Client;
+using RabbitMQReceiver;
 
 var factory = new ConnectionFactory { HostName = "localhost" };
 using var connection = factory.CreateConnection();
@@ -11,14 +12,5 @@ channel.QueueDeclare(queue: "hello",
                      autoDelete: false,
                      arguments: null);
 
-var message = "Hello World!";
-var body = Encoding.UTF8.GetBytes(message);
+QueueProducer.Publish(channel);
 
-channel.BasicPublish(exchange: string.Empty,
-                     routingKey: "hello",
-                     basicProperties: null,
-                     body: body);
-Console.WriteLine($" [x] Sent {message}");
-
-Console.WriteLine(" Press [enter] to exit.");
-Console.ReadLine();
