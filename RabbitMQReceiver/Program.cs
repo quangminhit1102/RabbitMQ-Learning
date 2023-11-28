@@ -8,10 +8,12 @@ var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhos
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-channel.QueueDeclare(queue: "hello",
-                     durable: false,
-                     exclusive: false,
-                     autoDelete: false,
-                     arguments: null);
+//channel.QueueDeclare(queue: "hello",
+//                     durable: false,
+//                     exclusive: false,
+//                     autoDelete: false,
+//                     arguments: null);
 
-QueueConsumer.Consumer(channel);
+//QueueConsumer.Consumer(channel);
+
+DirectExchangeReceiver.Consumer(channel);
