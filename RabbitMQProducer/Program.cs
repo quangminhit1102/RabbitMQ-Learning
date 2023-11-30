@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using RabbitMQ.Client;
-using RabbitMQReceiver;
+using RabbitMQSender;
 
 var factory = new ConnectionFactory { HostName = "localhost" };
 using var connection = factory.CreateConnection();
@@ -12,7 +12,15 @@ using var channel = connection.CreateModel();
 //                     autoDelete: false,
 //                     arguments: null);
 
+// // Queue
 //QueueProducer.Publish(channel);
 
-DirectExchangePublisher.Publish(channel);
+// // Direct Exchange Publisher
+//DirectExchangePublisher.Publish(channel);
+
+// // Topic Exchange
+//TopicExchangePublisher.Publish(channel);
+
+// // Header Exchange
+HeaderExchangePublisher.Publish(channel);
 

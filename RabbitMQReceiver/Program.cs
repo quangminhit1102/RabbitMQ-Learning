@@ -14,6 +14,14 @@ using var channel = connection.CreateModel();
 //                     autoDelete: false,
 //                     arguments: null);
 
+// // Queue
 //QueueConsumer.Consumer(channel);
 
-DirectExchangeReceiver.Consumer(channel);
+// // Direct Exchange
+//DirectExchangeReceiver.Consumer(channel);
+
+// // Topic Exchange
+//TopicExchangeConsumer.Consumer(channel);
+
+// // Header Exchange
+HeaderExchangeConsumer.Consumer(channel);

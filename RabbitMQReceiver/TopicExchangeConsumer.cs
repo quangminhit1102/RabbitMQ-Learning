@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RabbitMQReceiver
 {
-    public static class DirectExchangeReceiver
+    public static class TopicExchangeConsumer
     {
         /// <summary>
         /// publish message to queue.
@@ -16,15 +16,14 @@ namespace RabbitMQReceiver
         /// <param name="channel"></param>
         public static void Consumer(IModel channel)
         {
-            channel.ExchangeDeclare("direct-exchange", type: ExchangeType.Direct);
-            channel.QueueDeclare("direct-exchange-queue",
+            channel.ExchangeDeclare("topic-exchange", type: ExchangeType.Topic);
+            channel.QueueDeclare("topic-exchange-queue",
                 durable: true,
                 exclusive: false,
                 autoDelete: false,
                 arguments: null
                 );
-            channel.QueueBind("direct-exchange-queue", "direct-exchange", "CRoutingKey");
-            //channel.BasicQos(0, 10, false);
+            channel.QueueBind("topic-exchange-queue", "topic-exchange", "routingKey.pattern");
 
 
             var consumer = new EventingBasicConsumer(channel);
@@ -34,7 +33,7 @@ namespace RabbitMQReceiver
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine($"Received: {message}");
             };
-            channel.BasicConsume(queue: "direct-exchange-queue",
+            channel.BasicConsume(queue: "topic-exchange-queue",
                                  autoAck: true,
                                  consumer: consumer);
 
