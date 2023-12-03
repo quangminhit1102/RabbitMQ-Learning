@@ -22,5 +22,8 @@ using var channel = connection.CreateModel();
 //TopicExchangePublisher.Publish(channel);
 
 // // Header Exchange
-HeaderExchangePublisher.Publish(channel);
+//HeaderExchangePublisher.Publish(channel);
+
+// // Fanout Exchange
+FanoutExchangePublisher.Publish(channel);
 
