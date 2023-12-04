@@ -24,4 +24,8 @@ using var channel = connection.CreateModel();
 //TopicExchangeConsumer.Consumer(channel);
 
 // // Header Exchange
-HeaderExchangeConsumer.Consumer(channel);
+//HeaderExchangeConsumer.Consumer(channel);
+
+// // Fanout exchange
+FanoutExchangeConsumerMe.Consumer(channel);
+FanoutExchangeConsumerYou.Consumer(channel);
